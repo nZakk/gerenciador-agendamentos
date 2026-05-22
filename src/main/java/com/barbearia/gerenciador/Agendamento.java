@@ -19,4 +19,23 @@ public class Agendamento {
     private Double valor;
     private String status;
 
+    // --- GETTERS E SETTERS ---
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public String getNomeCliente() { return nomeCliente; }
+    public void setNomeCliente(String nomeCliente) { this.nomeCliente = nomeCliente; }
+
+    public LocalDateTime getDataHora() { return dataHora; }
+    public void setDataHora(LocalDateTime dataHora) { this.dataHora = dataHora; }
+
+    public String getTipoServico() { return tipoServico; }
+    public void setTipoServico(String tipoServico) { this.tipoServico = tipoServico; }
+
+    public Double getValor() { return valor; }
+    public void setValor(Double valor) { this.valor = valor; }
+
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 }
