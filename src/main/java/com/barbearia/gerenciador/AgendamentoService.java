@@ -1,24 +1,36 @@
 package com.barbearia.gerenciador;
 
 import org.springframework.stereotype.Service;
+import java.time.LocalDateTime;
 
 @Service
 public class AgendamentoService {
 
     private final AgendamentoRepository repository;
 
-    // O Gerente contrata o Bibliotecário para trabalhar com ele
     public AgendamentoService(AgendamentoRepository repository) {
         this.repository = repository;
     }
 
-    // Regra de Negócio: Como salvar um agendamento novo
     public Agendamento criarAgendamento(Agendamento novoAgendamento) {
         
-        // Clean Code: Usamos nomes claros (novoAgendamento) para saber exatamente o que a variável faz.
-        novoAgendamento.setStatus("PENDENTE"); // Todo agendamento nasce como pendente!
+        // 1. Validação: O nome não pode estar vazio
+        if (novoAgendamento.getNomeCliente() == null || novoAgendamento.getNomeCliente().trim().isEmpty()) {
+            throw new IllegalArgumentException("O nome do cliente é obrigatório.");
+        }
+
+        // 2. Validação: O serviço não pode estar vazio
+        if (novoAgendamento.getTipoServico() == null || novoAgendamento.getTipoServico().trim().isEmpty()) {
+            throw new IllegalArgumentException("O tipo de serviço é obrigatório.");
+        }
+
+        // 3. Validação: Não pode agendar no passado
+        if (novoAgendamento.getDataHora() != null && novoAgendamento.getDataHora().isBefore(LocalDateTime.now())) {
+            throw new IllegalArgumentException("Não é possível realizar um agendamento no passado.");
+        }
+
+        novoAgendamento.setStatus("PENDENTE");
         
-        // O gerente pede ao bibliotecário para salvar no banco
         return repository.save(novoAgendamento); 
     }
 }
