@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+## envLocal ##
+.env.local
+
+### h2 db teste###
+*.mv.db
