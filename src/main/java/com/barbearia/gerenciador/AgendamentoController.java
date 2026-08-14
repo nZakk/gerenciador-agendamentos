@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/agendamentos") // Todos os pedidos que começarem com /agendamentos caem aqui
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {"http://localhost:5173",
+    "https://front-gerenciador-agendamentos.onrender.com"
+})
 public class AgendamentoController {
 
     @Autowired
